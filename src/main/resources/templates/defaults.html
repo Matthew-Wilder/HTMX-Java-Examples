@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <th:block th:fragment="head-content">
+        <title th:text="${TITLE} ?: 'Mattmattica HTMX Examples'"></title>
+        <base th:href="${BASE_URL}">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <th:block th:replace="~{defaults :: head-fonts}"></th:block>
+        <th:block th:replace="~{defaults :: head-styles}"></th:block>
+        <th:block th:replace="~{defaults :: head-scripts}"></th:block>
+    </th:block>
+
+    <th:block th:fragment="head-fonts">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&display=swap">
+        <link rel="stylesheet" href="https://fonts.google.com/specimen/Bitter">
+    </th:block>
+
+    <th:block th:fragment="head-styles">
+        <link rel="stylesheet" th:href="@{/css/libs/bootstrap.min.css}">
+        <link rel="stylesheet" th:href="@{/css/styles.css}">
+        <link rel="stylesheet" th:href="@{/css/utils.css}">
+    </th:block>
+
+    <th:block th:fragment="head-scripts">
+        <script th:src="@{/js/libs/htmx-1.9.5.min.js}"></script>
+    </th:block>
+</head>
+<body>
+<header class="logo-font">
+    I am a header
+    <nav>
+        Im a navbar
+    </nav>
+</header>
+
+<footer>
+    I am a footer
+</footer>
+<th:block th:fragment="body-scripts">
+    <script th:src="@{/js/libs/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/libs/jquery-3.7.0.min.js}"></script>
+    <script th:src="@{/js/functions.js}"></script>
+</th:block>
+</body>
+</html>
