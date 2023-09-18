@@ -33,7 +33,7 @@ CREATE TABLE `pizza` (
 CREATE TABLE `serves` (
     `pizzeria_id` INT NOT NULL,
     `pizza_id` INT NOT NULL,
-    `price` DECFLOAT(2) NOT NULL,
+    `price` NUMERIC(5, 2) NOT NULL,
     FOREIGN KEY (`pizzeria_id`) REFERENCES `pizzeria`(`id`),
     FOREIGN KEY (`pizza_id`) REFERENCES `pizza`(`id`)
 );
