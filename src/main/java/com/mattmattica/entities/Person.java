@@ -1,13 +1,15 @@
 package com.mattmattica.entities;
 
 import com.mattmattica.enums.Gender;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -25,4 +27,24 @@ public class Person extends EntityI32 {
 
     @Column(name = "gender_id")
     private Gender gender;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "eats",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "pizza_id")
+    )
+    private Set<Pizza> pizzasEaten = new HashSet<>();
+
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "frequents",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "pizzeria_id")
+    )
+    private Set<Pizzeria> frequentedPizzerias = new HashSet<>();
+
+
+
 }
