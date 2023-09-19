@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{defaults :: head-content}"></th:block>
+</head>
+<body>
+<header th:replace="~{defaults :: header}"></header>
+<main>
+    <div class="container pt-20">
+        <form class="row g-3" hx-post="/order" hx-swap="outerHTML" hx-disinherit="hx-swap">
+            <div class="col-md-6">
+                <label for="person" class="form-label">Person</label>
+                <select id="person"
+                        name="personId"
+                        class="form-select"
+                        hx-get="/order/changePerson"
+                        hx-swap="none"
+                >
+                    <option selected disabled></option>
+                    <option th:each="person : ${people}" th:value="${person.getId()}" th:text="${person.getName()}"></option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="pizza" class="form-label">Pizza</label>
+                <select id="pizza"
+                        name="pizzaId"
+                        class="form-select"
+                        hx-swap-oob="#pizza"
+                        th:fragment="eats"
+                >
+                    <option selected disabled></option>
+                    <option th:each="pizza : ${eats}" th:value="${pizza.getId()}" th:text="${pizza.getName()}"></option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="pizzeria" class="form-label">Pizzeria</label>
+                <select id="pizzeria"
+                        name="pizzeriaId"
+                        class="form-select"
+                        hx-swap-oob="#pizzeria"
+                        th:fragment="frequents"
+                >
+                    <option selected disabled></option>
+                    <option th:each="pizzeria : ${frequents}" th:value="${pizzeria.getId()}" th:text="${pizzeria.getName()}"></option>
+                </select>
+            </div>
+            <div class="col-12"><button
+                    id="orderButton"
+                    class="btn btn-primary"
+            >Place Order</button></div>
+        </form>
+    </div>
+</main>
+<main>
+
+</main>
+<footer th:replace="~{defaults :: footer}"></footer>
+<th:block th:replace="~{defaults :: body-scripts}"></th:block>
+<script>
+
+</script>
+</body>
+</html>
