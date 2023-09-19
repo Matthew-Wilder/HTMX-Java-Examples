@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{defaults :: head-content}"></th:block>
+</head>
+<body>
+<header th:replace="~{defaults :: header}"></header>
+<!-- This example showcases the "Expand the Target" strategy -->
+<!-- Its weakness is that if the person's name was highlighted - or some visual state was in the people list - it would override that without other error correcting code -->
+<main>
+    <div class="container pt-20">
+        <div class="row" th:fragment="mainDataRow" id="mainDataRow">
+            <div class="col-md-4">
+                <h3>People</h3>
+                <ul id="people" class="list-group">
+                    <li class="list-group-item"
+                        hx-target="#mainDataRow"
+                        hx:get="${'/person/v2/' + person.getId() + '/eats'}"
+                        th:each="person : ${people}"
+                        th:text="${person.getName()}">
+                        Amy
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h3>Eats</h3>
+                <ul id="eats" class="list-group">
+                    <li class="list-group-item"
+                        th:if="${#ctx.containsVariable('eats')}"
+                        th:each="pizza : ${eats}"
+                        th:text="${pizza.getName()}">
+                        Cheese
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h3>Frequents</h3>
+                <ul id="frequents" class="list-group">
+                    <li class="list-group-item"
+                        th:if="${#ctx.containsVariable('frequents')}"
+                        th:each="pizzeria : ${frequents}"
+                        th:text="${pizzeria.getName()}">
+                        Dominos
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+<main>
+
+</main>
+<footer th:replace="~{defaults :: footer}"></footer>
+<th:block th:replace="~{defaults :: body-scripts}"></th:block>
+</body>
+</html>

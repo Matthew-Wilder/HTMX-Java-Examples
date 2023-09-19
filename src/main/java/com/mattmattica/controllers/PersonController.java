@@ -32,4 +32,22 @@ public class PersonController {
         model.addAttribute("frequents", p.getFrequentedPizzerias());
         return "people/summary/people-v1 :: eats";
     }
+
+
+    @GetMapping("/people/v2/summary")
+    public String getPeople2(Model model) {
+        List<Person> people = CollectionUtility.listOf(personRepository.findAll());
+        model.addAttribute("people", people);
+        return "people/summary/people-v2";
+    }
+
+    @GetMapping("/person/v2/{id}/{name}")
+    public String getEats2(Model model, @PathVariable("id") Integer personId) {
+        List<Person> people = CollectionUtility.listOf(personRepository.findAll());
+        Person p = personRepository.findById(personId).get();
+        model.addAttribute("people", people);
+        model.addAttribute("eats", p.getPizzasEaten());
+        model.addAttribute("frequents", p.getFrequentedPizzerias());
+        return "people/summary/people-v2 :: mainDataRow";
+    }
 }
