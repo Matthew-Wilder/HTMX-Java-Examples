@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{defaults :: head-content}"></th:block>
+</head>
+<body>
+<header th:replace="~{defaults :: header}"></header>
+<main>
+    <div class="container pt-20">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>People</h3>
+                <ul id="people" class="list-group">
+                    <li class="list-group-item"
+                        hx:get="${'/person/v3/' + person.getId() + '/eats'}"
+                        hx:swap="none"
+                        th:each="person : ${people}"
+                        th:text="${person.getName()}">
+                        Amy
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h3>Eats</h3>
+                <ul id="eats" class="list-group" th:fragment="foo" hx-swap-oob="#eats">
+                    <th:block th:if="${#ctx.containsVariable('eats')}">
+                        <li class="list-group-item"
+                            th:each="pizza : ${eats}"
+                            th:text="${pizza.getName()}">
+                            Cheese
+                        </li>
+                    </th:block>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h3>Frequents</h3>
+                <ul id="frequents" class="list-group" th:fragment="bar" hx-swap-oob="#frequents">
+                    <th:block th:if="${#ctx.containsVariable('frequents')}">
+                        <li class="list-group-item"
+                            th:each="pizzeria : ${frequents}"
+                            th:text="${pizzeria.getName()}">
+                            Dominos
+                        </li>
+                    </th:block>
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+<main>
+
+</main>
+<footer th:replace="~{defaults :: footer}"></footer>
+<th:block th:replace="~{defaults :: body-scripts}"></th:block>
+<script>
+    $('#people').on('click', '.list-group-item', function (event) {
+        event.preventDefault();
+        $(this).addClass('active').siblings().removeClass('active');
+    });
+</script>
+</body>
+</html>
