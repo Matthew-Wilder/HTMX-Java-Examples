@@ -52,5 +52,12 @@
 </main>
 <footer th:replace="~{defaults :: footer}"></footer>
 <th:block th:replace="~{defaults :: body-scripts}"></th:block>
+<script>
+    // This will not be re-run on hx-get's target.
+    $('#people').on('click', '.list-group-item', function (event) {
+        event.preventDefault();
+        $(this).addClass('active').siblings().removeClass('active');
+    });
+</script>
 </body>
 </html>

@@ -33,7 +33,7 @@
                 </ul>
             </div>
             <div class="col-md-4">
-                <h3 class="pt-20">Frequents</h3>
+                <h3>Frequents</h3>
                 <ul id="frequents" class="list-group">
                     <th:block th:fragment="frequents" th:if="${#ctx.containsVariable('frequents')}">
                         <li class="list-group-item"
@@ -52,5 +52,11 @@
 </main>
 <footer th:replace="~{defaults :: footer}"></footer>
 <th:block th:replace="~{defaults :: body-scripts}"></th:block>
+<script>
+    $('#people').on('click', '.list-group-item', function (event) {
+        event.preventDefault();
+        $(this).addClass('active').siblings().removeClass('active');
+    });
+</script>
 </body>
 </html>
