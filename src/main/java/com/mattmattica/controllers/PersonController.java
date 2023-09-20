@@ -28,7 +28,7 @@ public class PersonController {
         return "people/summary/people-v1";
     }
 
-    @GetMapping("/person/v1/{id}/{name}")
+    @GetMapping("/person/v1/{id}")
     public String getEats(Model model, @PathVariable("id") Integer personId) {
         Person p = personRepository.findById(personId).get();
         model.addAttribute("eats", p.getPizzasEaten());
@@ -45,7 +45,7 @@ public class PersonController {
         return "people/summary/people-v2";
     }
 
-    @GetMapping("/person/v2/{id}/{name}")
+    @GetMapping("/person/v2/{id}")
     public String getEats2(Model model, @PathVariable("id") Integer personId) {
         List<Person> people = CollectionUtility.listOf(personRepository.findAll());
         Person p = personRepository.findById(personId).get();
@@ -65,7 +65,7 @@ public class PersonController {
     }
 
     @HxRequest
-    @GetMapping("/person/v3/{id}/{name}")
+    @GetMapping("/person/v3/{id}")
     public HtmxResponse getEats3(Model model, @PathVariable("id") Integer personId) {
         Person p = personRepository.findById(personId).get();
         model.addAttribute("eats", p.getPizzasEaten());

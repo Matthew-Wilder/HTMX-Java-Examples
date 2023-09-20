@@ -48,11 +48,12 @@ public class PizzaOrderFormController {
     // HTML Form
     @HxRequest
     @PostMapping("/order")
-    public String postOrderForm(Model model, @RequestParam String pizzaId, @RequestParam String pizzeriaId) {
+    public String postOrderForm(Model model, @RequestParam Integer personId, @RequestParam Integer pizzaId, @RequestParam Integer pizzeriaId) {
         System.out.printf(
-                "Ordered a %s pizza from %s%n",
-                pizzaRepository.findById(Integer.parseInt(pizzaId)).get().getName(),
-                pizzeriaRepository.findById(Integer.parseInt(pizzeriaId)).get().getName()
+                "%s ordered a %s pizza from %s%n",
+                personRepository.findById(personId).get().getName(),
+                pizzaRepository.findById(pizzaId).get().getName(),
+                pizzeriaRepository.findById(pizzeriaId).get().getName()
         );
         List<Person> people = CollectionUtility.listOf(personRepository.findAll());
         model.addAttribute("people", people);

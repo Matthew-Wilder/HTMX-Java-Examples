@@ -15,7 +15,7 @@
                 <ul id="people" class="list-group">
                     <li class="list-group-item"
                         hx-target="#mainDataRow"
-                        hx:get="${'/person/v2/' + person.getId() + '/eats'}"
+                        hx:get="${'/person/v2/' + person.getId()}"
                         th:each="person : ${people}"
                         th:text="${person.getName()}">
                         Amy

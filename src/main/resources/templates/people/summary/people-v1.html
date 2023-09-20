@@ -13,7 +13,7 @@
                 <ul id="people" class="list-group">
                     <li class="list-group-item"
                         hx-target="#eats"
-                        hx:get="${'/person/v1/' + person.getId() + '/eats'}"
+                        hx:get="${'/person/v1/' + person.getId()}"
                         th:each="person : ${people}"
                         th:text="${person.getName()}">
                         Amy
