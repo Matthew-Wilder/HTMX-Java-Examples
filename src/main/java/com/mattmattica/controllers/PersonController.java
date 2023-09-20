@@ -75,4 +75,31 @@ public class PersonController {
         htmx.addTemplate("people/summary/people-v3 :: bar");
         return htmx;
     }
+
+
+
+    // Event Triggering
+    // Out of band responses
+    @GetMapping("/people/v4/summary")
+    public String getPeople4(Model model) {
+        List<Person> people = CollectionUtility.listOf(personRepository.findAll());
+        model.addAttribute("people", people);
+        return "people/summary/people-v4";
+    }
+
+    @HxRequest
+    @GetMapping("/person/v4/eats")
+    public String getEats4(Model model) {
+        Person p = personRepository.findById(5).get();
+        model.addAttribute("eats", p.getPizzasEaten());
+        return "people/summary/people-v4 :: foo";
+    }
+
+    @HxRequest
+    @GetMapping("/person/v4/frequents")
+    public String getFrequents4(Model model) {
+        Person p = personRepository.findById(5).get(); // Placeholder ID. Need to send
+        model.addAttribute("frequents", p.getFrequentedPizzerias());
+        return "people/summary/people-v4 :: bar";
+    }
 }
